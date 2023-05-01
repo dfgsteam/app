@@ -1,7 +1,8 @@
+package julius;
 public class PolynomialGF2 {
     
-    private final boolean[] koeffizienten; // Koeffizienten-Feld
-    private final int grad; // Grad des Polynoms
+    private boolean[] koeffizienten; // Koeffizienten-Feld
+    private int grad; // Grad des Polynoms
     
     public static final PolynomialGF2 ZERO = new PolynomialGF2(new boolean[] {}); // Null-Polynom
     public static final PolynomialGF2 ONE = new PolynomialGF2(new boolean[] { true }); // Eins-Polynom
