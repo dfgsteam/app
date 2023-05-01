@@ -5,5 +5,5 @@ public class Test {
         PolynomialGF2 object = new PolynomialGF2(array);
         PolynomialGF2 object2 = new PolynomialGF2(array2);
         System.out.println(object.mod(object2));
-    }
+    } 
 }
