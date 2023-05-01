@@ -108,21 +108,17 @@ public class PolynomialGF2 {
             boolean[] new_object = new boolean[this.polynom.length > plus_object.polynom.length ? this.polynom.length : plus_object.polynom.length];
             if (this.polynom.length > plus_object.polynom.length) {
                 int dif = this.polynom.length - plus_object.polynom.length;
-                for (int item_in_polynom=0; item_in_polynom<dif; item_in_polynom++) {
+                for (int item_in_polynom=0; item_in_polynom<dif; item_in_polynom++)
                     new_object[item_in_polynom] = this.polynom[item_in_polynom];
-                }
-                for (int item_in_polynom=0; item_in_polynom<plus_object.polynom.length; item_in_polynom++) {
+                for (int item_in_polynom=0; item_in_polynom<plus_object.polynom.length; item_in_polynom++)
                     new_object[dif+item_in_polynom] = (this.polynom[dif+item_in_polynom] == plus_object.polynom[item_in_polynom]) ? false : true;
-                }
             }
             else {
                 int dif = plus_object.polynom.length - this.polynom.length;
-                for (int item_in_polynom=0; item_in_polynom<dif; item_in_polynom++) {
+                for (int item_in_polynom=0; item_in_polynom<dif; item_in_polynom++)
                     new_object[item_in_polynom] = plus_object.polynom[item_in_polynom];
-                }
-                for (int item_in_polynom=0; item_in_polynom<this.polynom.length; item_in_polynom++) {
+                for (int item_in_polynom=0; item_in_polynom<this.polynom.length; item_in_polynom++) 
                     new_object[dif+item_in_polynom] = (this.polynom[item_in_polynom] == plus_object.polynom[dif+item_in_polynom]) ? false : true;
-                }
             }
             return new PolynomialGF2(new_object);     
         }
@@ -145,6 +141,35 @@ public class PolynomialGF2 {
         return new PolynomialGF2(new_object);
     }
 
+    public PolynomialGF2 mod(PolynomialGF2 mod_object) {
+        if (this.degree() == 0)
+            return mod_object;
+        if (this.degree() < mod_object.degree())
+            return this.clone();
+        
+        PolynomialGF2 rest_object = this.clone();
+        PolynomialGF2 result_object = new PolynomialGF2(ZERO);
+        while(rest_object.degree() > mod_object.degree()) {
+            boolean[] temp_bool = new boolean[rest_object.degree() - mod_object.degree() + 1];
+            temp_bool[0] = true;
+            result_object = result_object.plus(new PolynomialGF2(temp_bool));
+            rest_object = rest_object.plus(result_object.times(mod_object));
+        }
+        
 
+        
+        return result_object.shift(1);
+    }
 
+    public int degree() {
+        return this.polynom.length-1;
+    }
+
+    public PolynomialGF2 shift(int k) {
+        boolean[] new_object = new boolean[this.polynom.length + k];
+        for (int item_in_this_polynom = 0; item_in_this_polynom < this.polynom.length; item_in_this_polynom++)
+            new_object[item_in_this_polynom+k] = this.polynom[item_in_this_polynom];
+        return new PolynomialGF2(new_object);
+    }
+    
 }

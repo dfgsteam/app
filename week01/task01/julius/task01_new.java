@@ -1,11 +1,11 @@
 public class task01_new {
     public static void main(String args[]) {
-        boolean[] bool_test = {false, true, false, true};
-        boolean[] bool_test2 = {true, false, true, false};
+        boolean[] bool_test = {true, true, true, true};
+        boolean[] bool_test2 = {false, false, true, true};
         //boolean[] bool_test2 = null;
         PolynomialGF2 test1 = new PolynomialGF2(bool_test);
         PolynomialGF2 test2 = new PolynomialGF2(bool_test2);
-        PolynomialGF2 test3 = test1.times(test2);
+        PolynomialGF2 test3 = test1.mod(test2);
         //PolynomialGF2 test4 = test1.times(test2);
         System.out.println(test1.toString());
         System.out.println(test2.toString());
