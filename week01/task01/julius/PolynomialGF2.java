@@ -149,14 +149,14 @@ public class PolynomialGF2 {
         PolynomialGF2 rest_object = this.clone();
         PolynomialGF2 result_object = new PolynomialGF2(ZERO);
 
-        while (rest_object.degree() > divider.degree()) {
+        while (rest_object.degree() >= divider.degree()) {
             boolean[] tmp = new boolean[rest_object.degree() - divider.degree() + 1];
             tmp[0] = true;
             result_object = result_object.plus(new PolynomialGF2(tmp));
             rest_object = rest_object.plus(divider.times(result_object));
         }
 
-        return rest_object.shift(1);
+        return rest_object;
     }
 
     public int degree() {

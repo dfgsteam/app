@@ -4,6 +4,7 @@ public class task01_testclass {
         boolean[] mod_testclass_array = {true, false, true, true};
         PolynomialGF2 mod_testclass = new PolynomialGF2(mod_testclass_array);
 
+        System.out.println("Test 2:\n");
         System.out.println("i\t| hash \t| x^i");
         System.out.println("--------|-------|------");
 
@@ -15,7 +16,34 @@ public class task01_testclass {
 
         }
 
-        System.out.println("Test 2:");
-        
+        System.out.println("\n\nTest 2:\n");
+        for (int column=-1; column<16; column++) {
+            if (column==-1) {
+                String header1 = "";
+                String header2 = "";
+                for (int row=-1; row<16; row++) {
+                    if (row==-1) {
+                        header1 += "  |  ";
+                        header2 += "---";
+                    } else {
+                        header1 += (Integer.toHexString(row) + "   ");
+                        header2 += "----";
+                    }
+                }
+                System.out.println(header1);
+                System.out.println(header2);
+                
+            } else {
+                String line = "";
+                line += Integer.toHexString(column);
+                line += " | ";
+                for (int column_row=0; column_row<16; column_row++) {
+                    line += Integer.toHexString(column_row).length() < 2 ? "0" + Integer.toHexString(column_row) : Integer.toHexString(column_row);
+                    line += "  ";
+                }
+                System.out.println(line);
+
+            }
+        }
     }
 }
