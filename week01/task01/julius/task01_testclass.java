@@ -17,6 +17,13 @@ public class task01_testclass {
         }
 
         System.out.println("\n\nTest 2:\n");
+
+        boolean[] multiplicated_bool = {true, true};
+        boolean[] mod_bool = {true, false, false, false, true, true, false, true, true};
+        PolynomialGF2 multiplicated_alpha = new PolynomialGF2();
+        PolynomialGF2 multiplicated;
+
+
         for (int column=-1; column<16; column++) {
             if (column==-1) {
                 String header1 = "";
@@ -37,12 +44,29 @@ public class task01_testclass {
                 String line = "";
                 line += Integer.toHexString(column);
                 line += " | ";
+                int start = ((column-1)*16-1) < 0 ? 0 : (column-1)*16-1;
+                for (int multi=start; multi<(column*16-1); multi++)
+                    multiplicated_alpha = multiplicated_alpha.times(new PolynomialGF2(multiplicated_bool));
+                multiplicated = multiplicated_alpha;
+
                 for (int column_row=0; column_row<16; column_row++) {
-                    line += Integer.toHexString(column_row).length() < 2 ? "0" + Integer.toHexString(column_row) : Integer.toHexString(column_row);
+                    if (column != 0)
+                        multiplicated = multiplicated.times(new PolynomialGF2(multiplicated_bool));
+                    //long t_start = System.currentTimeMillis();
+                    multiplicated = multiplicated.mod(new PolynomialGF2(mod_bool));
+                    //long t_finish = System.currentTimeMillis();
+                    //System.out.println(t_finish - t_start);
+                    int hex_res = 0;
+                    System.out.println(multiplicated.toString());
+                    boolean[] temp_array = multiplicated.toArray();
+                    for (int k = multiplicated.degree(); k >= 0; k--)
+                        if (temp_array[k])
+                            hex_res += Math.pow(2, multiplicated.degree() - k);
+                    line += Integer.toHexString(hex_res).length() < 2 ? "0" + Integer.toHexString(hex_res) : Integer.toHexString(hex_res);
                     line += "  ";
                 }
                 System.out.println(line);
-
+                
             }
         }
     }

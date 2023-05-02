@@ -142,21 +142,25 @@ public class PolynomialGF2 {
     }
 
     public PolynomialGF2 mod(PolynomialGF2 divider) {
-        if (this.degree() == 0 || divider.degree() > this.degree())
+        if (this.degree() < divider.degree()) {
             return this.clone();
-
-
-        PolynomialGF2 rest_object = this.clone();
-        PolynomialGF2 result_object = new PolynomialGF2(ZERO);
-
-        while (rest_object.degree() >= divider.degree()) {
-            boolean[] tmp = new boolean[rest_object.degree() - divider.degree() + 1];
-            tmp[0] = true;
-            result_object = result_object.plus(new PolynomialGF2(tmp));
-            rest_object = rest_object.plus(divider.times(result_object));
         }
-
-        return rest_object;
+    
+        int n = this.polynom.length;
+        int m = divider.polynom.length;
+        boolean[] result = Arrays.copyOf(this.polynom, n);
+        
+        for (int i = n - m - 1; i >= 0; i--) {
+            if (result[i + m]) {
+                for (int j = 0; j < m; j++) {
+                    int a = result[i + j] ? 1: 0;
+                    int b = divider.polynom[j] ? 1 : 0;
+                    result[i + j] = (a ^ b) == 1 ? true : false;
+                }
+            }
+        }
+        
+        return new PolynomialGF2(Arrays.copyOf(result, n - m));
     }
 
     public int degree() {
