@@ -142,12 +142,9 @@ public class PolynomialGF2 {
     }
 
     public PolynomialGF2 mod(PolynomialGF2 divider) {
-        if (this.degree() == 0)
-            return divider;
-
-        if (divider.degree() > this.degree()) {
+        if (this.degree() == 0 || divider.degree() > this.degree())
             return this.clone();
-        }
+
 
         PolynomialGF2 rest_object = this.clone();
         PolynomialGF2 result_object = new PolynomialGF2(ZERO);
@@ -156,11 +153,11 @@ public class PolynomialGF2 {
             boolean[] tmp = new boolean[rest_object.degree() - divider.degree() + 1];
             tmp[0] = true;
             result_object = result_object.plus(new PolynomialGF2(tmp));
-            rest_object = rest_object.plus(result_object.times(divider));
+            rest_object = rest_object.plus(divider.times(result_object));
         }
 
         return rest_object.shift(1);
-   }
+    }
 
     public int degree() {
         return this.polynom.length-1;
