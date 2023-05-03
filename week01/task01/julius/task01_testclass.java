@@ -52,12 +52,8 @@ public class task01_testclass {
                 for (int column_row=0; column_row<16; column_row++) {
                     if (column != 0)
                         multiplicated = multiplicated.times(new PolynomialGF2(multiplicated_bool));
-                    //long t_start = System.currentTimeMillis();
                     multiplicated = multiplicated.mod(new PolynomialGF2(mod_bool));
-                    //long t_finish = System.currentTimeMillis();
-                    //System.out.println(t_finish - t_start);
                     int hex_res = 0;
-                    System.out.println(multiplicated.toString());
                     boolean[] temp_array = multiplicated.toArray();
                     for (int k = multiplicated.degree(); k >= 0; k--)
                         if (temp_array[k])
