@@ -43,13 +43,15 @@ public class Rational extends BasisFraction {
     }
 
     @Override
-    public Ration clone() {
+    public Rational clone() {
         return new Rational(this.numerator, this.denominator);
     }
 
     @Override
-    public Boolean equals(Ration test_object) {
-        return (this.toString() == test_object.toString());
+    public boolean equals(Object test_object) {
+        if (test_object instanceof Rational)
+            return (this.toString() == test_object.toString());
+        return false;
     }
 
     @Override

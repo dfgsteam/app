@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"app.exercise.algebra","l":"BasisFraction"},{"p":"app.exercise.algebra","l":"Fractional"},{"p":"app.exercise.algebra","l":"Rational"},{"p":"app.exercise.testing","l":"RationalTesting"}];updateSearchResults();
