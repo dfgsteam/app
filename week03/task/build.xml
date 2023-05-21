@@ -1,0 +1,34 @@
+<project name="app_week03" basedir="." default="compile">
+    <property name="src.dir" value="src/"/>
+    <property name="build.dir" value="build"/>
+    <property name="docs.dir" value="docs"/>
+
+    <target name="init-build">
+        <mkdir dir="${build.dir}"/>
+    </target>
+
+    <target name="init-docs">
+        <mkdir dir="${docs.dir}"/>
+    </target>
+
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+    </target>
+
+    <target name="clean-docs">
+        <delete dir="${docs.dir}"/>
+    </target>
+
+    <target name="docs" depends="init-docs">
+        <javadoc sourcepath="${src.dir}" destdir="${docs.dir}" author="true" version="true" private="true">
+            <fileset dir="${src.dir}">
+                <include name="**/*.java"/>
+            </fileset>
+        </javadoc>
+    </target>
+
+    <target name= "compile" depends="init-build">
+        <javac srcdir="${src.dir}" destdir= "${build.dir}"/> 
+    </target>
+
+</project>
