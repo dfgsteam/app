@@ -184,9 +184,33 @@ public class BSTree<T extends Comparable<T>> extends AbstractCollection<T> {
         return true;
     }
     
-    @Override
-    public Iterator<T> iterator() {
-        return null;
+
+    public Node<T> getRoot() {
+    	return root;
     }
+    
+    public Node<T> getRunning() {
+    	return running;
+    }
+    
+    public void setRunning(Node<T> running) {
+    	this.running = running;
+    }
+
+	@Override
+	public Iterator<T> iterator() {
+		return (Iterator<T>) new BSTreeIterator<T>(this);
+	}
+	
+	@Override
+	public T[] toArray() {
+		ArrayList<T> array = new ArrayList<T>();
+		Iterator<T> it = iterator();
+		array.add(this.running.getValue());
+		while (it.hasNext()) {
+			array.add(it.next());
+		}
+		return (T[]) array.toArray();
+	}
 }
 

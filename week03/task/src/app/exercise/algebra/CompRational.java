@@ -27,13 +27,15 @@ public class CompRational extends Rational implements Comparable {
      *         gleich oder größer als das angegebene Objekt ist
      */
     @Override
-    public int compareTo(Object o) {
-        if (o instanceof Fractional) {
-            final Fractional fraction = (Fractional) o;
-            if (this.equals(fraction))
-                return 0;
-            return (this.getN() / this.getD()) < fraction.getN() / fraction.getD() ? 1 : -1;
-        }
-        return 1;
-    }
+	public int compareTo(Object object) {
+		if (!(object instanceof CompRational))
+			return 0;
+		
+		CompRational obj = (CompRational)object;
+		if (this.getN() * obj.getD() == this.getD() * obj.getN())
+			return 0;
+		else if (this.getN() * obj.getD() > this.getD() * obj.getD())
+			return 1;
+		return -1;
+	}
 }

@@ -3,6 +3,9 @@ import app.exercise.algebra.Rational;
 
 /**
 * Die Klasse RationalTesting wird verwendet, um die Methoden der Rational-Klasse zu testen.
+ * @author Julius Hunold
+ * Georg-August-Universität in Göttingen
+ * @version v1.0
 */
 public class RationalTesting{
     /**
