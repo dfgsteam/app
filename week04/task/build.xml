@@ -1,0 +1,49 @@
+<project name="APP" basedir="." default="jar">
+    <property name="src.dir" value="src"/>
+    <property name="build.dir" value="build"/>
+    <property name="docs.dir" value="docs"/>
+
+    <target name="init-build">
+        <mkdir dir="${build.dir}"/>
+    </target>
+
+    <target name="init-docs">
+        <mkdir dir="${docs.dir}"/>
+    </target>
+
+    <target name="clean" depends="clean-docs, clean-compile">
+        <delete file="uebung04.jar"/>
+    </target>
+
+    <target name="clean-compile">
+        <delete dir="${build.dir}"/>
+    </target>
+
+    <target name="clean-docs">
+        <delete dir="${docs.dir}"/>
+    </target>
+
+    <target name="docs" depends="init-docs">
+        <javadoc sourcepath="${src.dir}" destdir="${docs.dir}" author="true" version="true" private="true">
+            <fileset dir="${src.dir}">
+                <include name="**/*.java"/>
+            </fileset>
+        </javadoc>
+    </target>
+
+    <target name= "compile" depends="init-build">
+        <javac srcdir="${src.dir}" destdir= "${build.dir}" includeantruntime="false"/> 
+    </target>
+
+    <target name="jar" depends="compile, docs">
+        <mkdir dir=""/>
+        <javac srcdir="${src.dir}" destdir="${build.dir}"/>
+        <jar destfile="uebung04.jar" basedir="${build.dir}">
+            <manifest>
+                <attribute name="Main-Class" value="Uebung04"/>
+            </manifest>
+        </jar>
+    </target>
+
+
+</project>
